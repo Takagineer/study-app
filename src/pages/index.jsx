@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import App from '../components/App'
 import { signUpWithEmailAndPassword,signInWithEmailAndPassword,signOut } from '../firebase'
+import {auth} from '../firebase'
 
 export default function Home() {
 
@@ -30,6 +31,7 @@ export default function Home() {
     <App>
       <p>認証機能の実装</p>
       <h1>認証機能</h1>
+      <div>{auth.currentUser}</div>
       <h2>新規登録機能</h2>
       <input
         type="email"
@@ -60,9 +62,10 @@ export default function Home() {
       onChange={passwordValue}
       placeholder="Password"
       />
-      <button onClick={signIn}>登録</button>
+      <button onClick={signIn}>ログイン</button>
 
       <div>
+
         <button onClick={signOut}>ログアウト</button>
       </div>
     </App>

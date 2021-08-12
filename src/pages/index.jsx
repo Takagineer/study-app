@@ -5,8 +5,13 @@ import {auth} from '../firebase'
 
 export default function Home() {
 
+  // const [username,setUsername]=useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  // const usernameValue=(e)=>{
+  //   setUsername(e.target.value)
+  // }
 
   const emailValue=(e)=>{
     setEmail(e.target.value)
@@ -16,7 +21,11 @@ export default function Home() {
   }
 
   const signUp =async() =>{
-    const user=await signUpWithEmailAndPassword(email,password)
+    const user=await signUpWithEmailAndPassword(
+      // username,
+      email,
+      password)
+    // setUsername('')
     setEmail('')
     setPassword('')
   }
@@ -31,8 +40,10 @@ export default function Home() {
     <App>
       <p>認証機能の実装</p>
       <h1>認証機能</h1>
-      <div>{auth.currentUser}</div>
+      {auth.currentUser===null ? 
+      <div>
       <h2>新規登録機能</h2>
+      <br />
       <input
         type="email"
         value={email}
@@ -63,11 +74,20 @@ export default function Home() {
       placeholder="Password"
       />
       <button onClick={signIn}>ログイン</button>
-
+      </div>
+      : 
       <div>
-
+        {auth.currentUser===null ? '現在ログインしているユーザーはいません' : '現在、ログインしています'}
+        <br />
         <button onClick={signOut}>ログアウト</button>
       </div>
+      
+      
+      }
+
+      
+
+      
     </App>
   )
 }

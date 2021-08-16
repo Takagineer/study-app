@@ -25,13 +25,19 @@ export default function AddData() {
     // コレクションの取得
   }
 
-    const handleClickAddButton=()=>{
-      db.collection('users').doc('1').set({
-        name:'田中',
-        age:'50',
-        country:'JPN'
+    const handleClickAddButton=async()=>{
+      // db.collection('users').doc('1').set({
+      //   name:'田中',
+      //   age:'50',
+      //   country:'JPN'
+      // },{merge:true})
+      /*mergeをsetの第二引数に指定することで、ドキュメント全体への変更を防ぐことができる。
+      */
+
+      const ref = await db.collection('users').add({
+        name:'源之助',
+        age:70
       })
-      console.log('addボタンが押下されました')
     }
   
   return (

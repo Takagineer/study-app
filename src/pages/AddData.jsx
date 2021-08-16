@@ -24,10 +24,21 @@ export default function AddData() {
     })
     // コレクションの取得
   }
+
+    const handleClickAddButton=()=>{
+      db.collection('users').doc('1').set({
+        name:'田中',
+        age:'50',
+        country:'JPN'
+      })
+      console.log('addボタンが押下されました')
+    }
+  
   return (
     <>
       <h1>FireeStore用とのデータのやり取り確認用のページです。</h1>
       <Button color="primary" onClick={handleClickFetchButton}>firestoreからデータの取得</Button>
+      <Button color="secondary" onClick={handleClickAddButton}>firestoreへのデータの追加</Button>
     </>
   )
 }

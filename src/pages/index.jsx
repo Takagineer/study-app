@@ -1,11 +1,13 @@
+import Link from 'next/link'
 import { useState } from 'react'
 import App from '../components/App'
-import { signUpWithEmailAndPassword,signInWithEmailAndPassword,signOut } from '../firebase'
+import { signUpWithEmailAndPassword,signInWithEmailAndPassword,signOut,createUser } from '../firebase'
 import {auth} from '../firebase'
 
 export default function Home() {
 
   // const [username,setUsername]=useState('')
+  const [name,setName]=useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -13,6 +15,9 @@ export default function Home() {
   //   setUsername(e.target.value)
   // }
 
+  const nameValue=(e)=>{
+    setName(e.target.value)
+  }
   const emailValue=(e)=>{
     setEmail(e.target.value)
   }
@@ -26,6 +31,16 @@ export default function Home() {
       email,
       password)
     // setUsername('')
+    setEmail('')
+    setPassword('')
+  }
+  const signUpNew =async() =>{
+    const user=await createUser(
+      name,
+      email,
+      password)
+    // setUsername('')
+    setName('')
     setEmail('')
     setPassword('')
   }
@@ -45,6 +60,13 @@ export default function Home() {
       <h2>新規登録機能</h2>
       <br />
       <input
+        type="displayName"
+        value={name}
+        onChange={nameValue}
+        placeholder="表示名"
+      />
+      < br />
+      <input
         type="email"
         value={email}
         onChange={emailValue}
@@ -58,6 +80,8 @@ export default function Home() {
       placeholder="Password"
       />
       <button onClick={signUp}>登録</button>
+      <br />
+      <button onClick={signUpNew}>登録</button>
 
       <h2>サインイン機能</h2>
       <input
@@ -85,7 +109,9 @@ export default function Home() {
       
       }
 
-      
+      <Link href="/AddData">
+        <a>データ追加用のページへ</a>
+      </Link>
 
       
     </App>

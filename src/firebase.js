@@ -33,6 +33,25 @@ export const signUpWithEmailAndPassword = async (email, password) => {
 };
 //新規登録メソッド
 
+//新規登録用ののメソッド。https://firebase.google.com/docs/auth/admin/manage-users?hl=ja#create_a_userを参考。
+export const createUser = async (name, email, password) => {
+  try {
+    const user = await firebase.auth().createUser({
+      name: "displayName",
+      email: "email",
+      password: "password",
+    });
+    // await firebase.auth().currentUser.sendEmailVerification;
+
+    alert("登録成功");
+    return user;
+  } catch (error) {
+    alert("errorですよ");
+    console.log(error);
+  }
+};
+//新規登録用ののメソッド
+
 //ログイン用メソッド
 export const signInWithEmailAndPassword = async (email, password) => {
   try {
@@ -62,18 +81,6 @@ export const signOut = async () => {
 };
 //サインアウト用メソッド
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    var uid = user.uid;
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
-
 export const auth = firebase.auth();
-// export const db = firebase.firestore();
+export const db = firebase.firestore();
 export default firebase;

@@ -5,10 +5,10 @@ import { db } from '../firebase'
 import { Button } from '@material-ui/core';
 
 export default function AddData() {
-  const handleClickFetchButton=()=>{
-    db.collection('users').doc('GmMn9BiFZAaaY0Mu1N4l').get().then((doc)=>{
-      console.log("Document data:", doc.data());
-    })
+  const handleClickFetchButton=async()=>{
+    const doc = await db.collection('users').doc('GmMn9BiFZAaaY0Mu1N4l').get()
+    console.log(doc.data())
+
     console.log('Fetchボタンが押下されました')
   }
   return (
